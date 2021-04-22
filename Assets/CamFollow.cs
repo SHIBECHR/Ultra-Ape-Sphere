@@ -90,7 +90,7 @@ public class CamFollow : MonoBehaviour
             child.transform.RotateAround(player.transform.position, Vector3.right, t2);
         }
 
-        print(child.GetComponent<Rigidbody>().velocity);
+       // print(child.GetComponent<Rigidbody>().velocity);
         
     }
 
