@@ -16,7 +16,7 @@ public class CamFollow : MonoBehaviour
 
     public Transform to;
     public Transform from;
-    public float speed = 1;
+    public float speed = 2;
 
     public GameObject parent;
     public GameObject child;
@@ -30,7 +30,7 @@ public class CamFollow : MonoBehaviour
         float X = Input.GetAxis("Mouse X") * mouseSpeed;
         float Y = Input.GetAxis("Mouse Y") * mouseSpeed;
 
-        parent.transform.RotateAround(player.transform.position, Vector3.up, X); // Player rotates on Y axis, your Cam is child, then rotates too
+        parent.transform.RotateAround(player.transform.position, Vector3.up, -X); // Player rotates on Y axis, your Cam is child, then rotates too
 
         //to.transform.Rotate(0, X, 0); // Player rotates on Y axis, your Cam is child, then rotates too
         player.transform.Rotate(-Y / 100f, 0, 0);
@@ -78,7 +78,7 @@ public class CamFollow : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            t2 = 0.01f;
+            t2 = 0.1f;
         }
         else
         {
