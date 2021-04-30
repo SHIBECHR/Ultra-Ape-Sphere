@@ -16,7 +16,7 @@ public class CamFollow : MonoBehaviour
 
     public Transform to;
     public Transform from;
-    public float speed = 2;
+    public float speed = 1;
 
     public GameObject parent;
     public GameObject child;
@@ -55,6 +55,8 @@ public class CamFollow : MonoBehaviour
         transform.position = pos;
         Tilter();
         TilterV2();
+        
+        
     }
 
     // On key release, resets rotation slowly
@@ -78,17 +80,44 @@ public class CamFollow : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            t2 = 0.1f;
+            t2 = 0.05f;
+            if (!barrier.hit)
+            {
+                child.transform.RotateAround(player.transform.position, Vector3.right, t2);
+            }
+
         }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            t2 = 0.05f;
+            if (!barrier.hit)
+            {
+                child.transform.RotateAround(player.transform.position, Vector3.left, t2);
+            }
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            t2 = 0.05f;
+            if (!barrier.hit)
+            {
+                child.transform.RotateAround(player.transform.position, Vector3.back, t2);
+            }
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            t2 = 0.05f;
+            if (!barrier.hit)
+            {
+                child.transform.RotateAround(player.transform.position, Vector3.forward, t2);
+            }
+        }
+
         else
         {
             t2 = 0.0f;
         }
 
-        if(!barrier.hit)
-        {
-            child.transform.RotateAround(player.transform.position, Vector3.right, t2);
-        }
+        
 
        // print(child.GetComponent<Rigidbody>().velocity);
         
