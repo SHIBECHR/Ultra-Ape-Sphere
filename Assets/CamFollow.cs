@@ -25,6 +25,9 @@ public class CamFollow : MonoBehaviour
     float t = 0.0f;
     float t2 = 0.0f;
 
+    public bool RotateW;
+   
+
     private void FixedUpdate()
     {
         float X = Input.GetAxis("Mouse X") * mouseSpeed;
@@ -53,7 +56,7 @@ public class CamFollow : MonoBehaviour
         transform.position = pos;
         pos.y += CameraHeight;
         transform.position = pos;
-        Tilter();
+        //Tilter();
         TilterV2();
         
         
@@ -80,6 +83,7 @@ public class CamFollow : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
+            RotateW = true;
             t2 = 0.05f;
             if (!barrier.hit)
             {
@@ -87,7 +91,27 @@ public class CamFollow : MonoBehaviour
             }
 
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKeyUp(KeyCode.W))
+		{
+            RotateW = true;
+        }
+        if (child.transform.rotation.y > 0 || child.transform.rotation.x > 0 || child.transform.rotation.z > 0|| child.transform.rotation.y < 0 || child.transform.rotation.x < 0 || child.transform.rotation.z < 0)
+        {
+            RotateW = false;
+            t2 = 0.05f;
+            if(RotateW == true)
+			{
+                child.transform.RotateAround(player.transform.position, Vector3.left, t2);
+			}
+            
+            
+            
+
+        }
+
+
+
+        if (Input.GetKey(KeyCode.S))
         {
             t2 = 0.05f;
             if (!barrier.hit)
@@ -110,6 +134,34 @@ public class CamFollow : MonoBehaviour
             {
                 child.transform.RotateAround(player.transform.position, Vector3.forward, t2);
             }
+        }
+        
+        else if (Input.GetKeyUp(KeyCode.A))
+        {
+            t2 = -0.05f;
+            if (child.transform.rotation.y != 0 && child.transform.rotation.x != 0 && child.transform.rotation.z != 0)
+            {
+                child.transform.RotateAround(player.transform.position, Vector3.forward, t2);
+            }
+
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            t2 = -0.05f;
+            if (child.transform.rotation.y != 0 && child.transform.rotation.x != 0 && child.transform.rotation.z != 0)
+            {
+                child.transform.RotateAround(player.transform.position, Vector3.left, t2);
+            }
+
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            t2 = -0.05f;
+            if (child.transform.rotation.y != 0 && child.transform.rotation.x != 0 && child.transform.rotation.z != 0)
+            {
+                child.transform.RotateAround(player.transform.position, Vector3.back, t2);
+            }
+
         }
 
         else
