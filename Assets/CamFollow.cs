@@ -11,6 +11,7 @@ public class CamFollow : MonoBehaviour
 	public float mouseSpeed = 3;
 	public Transform player;
 	public Camera yourCam;
+	public Camera Above;
 
 	public float turnspeed = 10;
 
@@ -22,7 +23,9 @@ public class CamFollow : MonoBehaviour
 	public GameObject child;
 	public DetectCollision barrier;
 
-	float t = 0.0f;
+	Vector3 posSpawn;
+
+	//float t = 0.0f;
 	float t2 = 0.0f;
 	float t3 = 0.0f;
 	float t4 = 0.0f;
@@ -35,7 +38,7 @@ public class CamFollow : MonoBehaviour
 
 	public bool RotateW;
 
-
+	
 	private void FixedUpdate()
 	{
 		float X = Input.GetAxis("Mouse X") * mouseSpeed;
@@ -66,38 +69,58 @@ public class CamFollow : MonoBehaviour
 		transform.position = pos;
 		//Tilter();
 		TilterV2();
-
-
+		CameraSwitch();
+		posSpawn = player1.transform.position;
 	}
-
-	// On key release, resets rotation slowly
-	public void Tilter()
+	void Start()
 	{
-		if (Input.GetKey(KeyCode.W))
-		{
-			t = 0.0f;
-		}
-		else
-		{
-			t += Time.deltaTime * speed;
-		}
+		yourCam.enabled = true;
+		Above.enabled = false;
+		player1.transform.position = posSpawn;
+	}
+	//experimental code from when hope still resided within
+	// On key release, resets rotation slowly
+	//public void Tilter()
+	//{
+	//	if (Input.GetKey(KeyCode.W))
+	//	{
+	//		t = 0.0f;
+	//	}
+	//	else
+	//	{
+	//		t += Time.deltaTime * speed;
+	//	}
 
-		//child.transform.localRotation = Quaternion.Lerp(child.transform.localRotation, to.rotation, t); want to use this. feels easier
-		//child.transform.RotateAround(player.transform.position, Vector3.right, -t2);
+	//	//child.transform.localRotation = Quaternion.Lerp(child.transform.localRotation, to.rotation, t); want to use this. feels easier
+	//	//child.transform.RotateAround(player.transform.position, Vector3.right, -t2);
 
-		/*
-        Quaternion src = child.transform.rotation;
-        Quaternion dst = src * Quaternion.AngleAxis(angle: 15f, axis: player.transform.right);   this makes it rotate around witout doing much
-        child.transform.rotation = Quaternion.Slerp(src, dst, t);
-        */
-		//Vector3 pivot = player.transform.position;
-		//Vector3 axis = player.transform.right;
-		//Vector3 src = child.transform.position;
-		//Vector3 dst = pivot + Quaternion.AngleAxis(1f, axis) * (src - pivot);  //so does this
-		//child.transform.position = Vector3.Lerp(src, dst, t);
+	//	/*
+ //       Quaternion src = child.transform.rotation;
+ //       Quaternion dst = src * Quaternion.AngleAxis(angle: 15f, axis: player.transform.right);   this makes it rotate around witout doing much
+ //       child.transform.rotation = Quaternion.Slerp(src, dst, t);
+ //       */
+	//	//Vector3 pivot = player.transform.position;
+	//	//Vector3 axis = player.transform.right;
+	//	//Vector3 src = child.transform.position;
+	//	//Vector3 dst = pivot + Quaternion.AngleAxis(1f, axis) * (src - pivot);  //so does this
+	//	//child.transform.position = Vector3.Lerp(src, dst, t);
+	//}
+
+	public void CameraSwitch()//switches between cameras, essentailly a map mode to help get bearings
+	{
+		if (Input.GetKeyDown(KeyCode.C))
+		{
+			yourCam.enabled = false;
+			Above.enabled = true;
+		}
+		if (Input.GetKeyUp(KeyCode.C))
+		{
+			yourCam.enabled = true;
+			Above.enabled = false;
+		}
 	}
 
-	// On key press, tilts the plane
+	// On key press, tilts the maze
 	public void TilterV2()
 	{
 
@@ -138,6 +161,8 @@ public class CamFollow : MonoBehaviour
 				child.transform.RotateAround(player.transform.position, Vector3.forward, t5);
 			}
 		}
+
+		//experimental code from when i still had dreams
 		//      else
 		//{
 		//          RotateW = true;
@@ -201,13 +226,13 @@ public class CamFollow : MonoBehaviour
 		//    t4 = 0.0f;
 		//}
 
-		if (Input.GetKey(KeyCode.A))
-		{
-			t5 = 0.05f;
-			if (!barrier.hit)
-			{
-				child.transform.RotateAround(player.transform.position, Vector3.forward, t5);
-			}
+		//if (Input.GetKey(KeyCode.A))
+		//{
+		//	t5 = 0.05f;
+		//	if (!barrier.hit)
+		//	{
+		//		child.transform.RotateAround(player.transform.position, Vector3.forward, t5);
+		//	}
 			//}
 			//else
 			//{
@@ -257,9 +282,9 @@ public class CamFollow : MonoBehaviour
 
 			// print(child.GetComponent<Rigidbody>().velocity);
 
-		}
-
-
-
 	}
+
+
+
+	
 }
