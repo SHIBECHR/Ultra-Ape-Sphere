@@ -22,6 +22,7 @@ public class CamFollow : MonoBehaviour
 	public GameObject parent;
 	public GameObject child;
 	public DetectCollision barrier;
+	public GameObject StartCube;
 
 	Vector3 posSpawn;
 
@@ -70,13 +71,13 @@ public class CamFollow : MonoBehaviour
 		//Tilter();
 		TilterV2();
 		CameraSwitch();
-		posSpawn = player1.transform.position;
+		//posSpawn = StartCube.transform.position;
 	}
 	void Start()
 	{
 		yourCam.enabled = true;
 		Above.enabled = false;
-		player1.transform.position = posSpawn;
+		//player1.transform.position = posSpawn;
 	}
 	//experimental code from when hope still resided within
 	// On key release, resets rotation slowly
@@ -127,7 +128,7 @@ public class CamFollow : MonoBehaviour
 		if (Input.GetKey(KeyCode.W))
 		{
 			RotateW = true;
-			t2 = 0.05f;
+			t2 = 0.1f;
 
 			if (!barrier.hit)
 			{
@@ -138,7 +139,7 @@ public class CamFollow : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.S))
 		{
-			t3 = 0.05f;
+			t3 = 0.1f;
 			if (!barrier.hit)
 			{
 				child.transform.RotateAround(player.transform.position, Vector3.left, t3);
@@ -147,7 +148,7 @@ public class CamFollow : MonoBehaviour
 
 		if (Input.GetKey(KeyCode.D))
 		{
-			t4 = 0.05f;
+			t4 = 0.1f;
 			if (!barrier.hit)
 			{
 				child.transform.RotateAround(player.transform.position, Vector3.back, t4);
@@ -155,7 +156,7 @@ public class CamFollow : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.A))
 		{
-			t5 = 0.05f;
+			t5 = 0.1f;
 			if (!barrier.hit)
 			{
 				child.transform.RotateAround(player.transform.position, Vector3.forward, t5);

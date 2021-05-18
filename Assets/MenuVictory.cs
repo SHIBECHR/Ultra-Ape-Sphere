@@ -17,11 +17,11 @@ public class MenuVictory : MonoBehaviour
     }
     public void StartGame()//for menu to load into game
 	{
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(0);
     }
     public void VictoryScreen()//for when you reah the end of the maze, this take you back to menu
     {
-        SceneManager.LoadScene("MenuScene");
+        SceneManager.LoadScene(1);
     }
     void OnCollisionEnter(Collision collision)//detects collision between the End cube and the player
 	{
