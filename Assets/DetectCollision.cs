@@ -5,7 +5,8 @@ using UnityEngine;
 public class DetectCollision : MonoBehaviour
 {
     public bool hit = false;
-    private void OnCollisionEnter(Collision collision)
+
+	private void OnCollisionEnter(Collision collision)
     {
         hit = true;
     }

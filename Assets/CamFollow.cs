@@ -128,7 +128,7 @@ public class CamFollow : MonoBehaviour
 		if (Input.GetKey(KeyCode.W))
 		{
 			RotateW = true;
-			t2 = 0.1f;
+			t2 = 1f;
 
 			if (!barrier.hit)
 			{
@@ -139,7 +139,7 @@ public class CamFollow : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.S))
 		{
-			t3 = 0.1f;
+			t3 = 1f;
 			if (!barrier.hit)
 			{
 				child.transform.RotateAround(player.transform.position, Vector3.left, t3);
@@ -148,7 +148,7 @@ public class CamFollow : MonoBehaviour
 
 		if (Input.GetKey(KeyCode.D))
 		{
-			t4 = 0.1f;
+			t4 = 1f;
 			if (!barrier.hit)
 			{
 				child.transform.RotateAround(player.transform.position, Vector3.back, t4);
@@ -156,7 +156,7 @@ public class CamFollow : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.A))
 		{
-			t5 = 0.1f;
+			t5 = 1f;
 			if (!barrier.hit)
 			{
 				child.transform.RotateAround(player.transform.position, Vector3.forward, t5);

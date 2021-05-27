@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Death : MonoBehaviour
 {
     public GameObject ApeSphere;
@@ -20,13 +20,14 @@ public class Death : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject.tag == "ApeSphere")
-        {   
-            Vector3 pos1 = StartPos.transform.position;
-            ApeSphere.transform.position = pos1;
-            print("death");
-        }
-        
+
+
+
+        Invoke("Spawn", 0.3f);
+
+    }
+    public void Spawn()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -20,7 +20,7 @@ public class DetectDeath : MonoBehaviour
     {
         if (collision.gameObject.tag == "ApeSphere")//ApeSphere is what i tagged the player before i had changed the game, decided to keep it
         {
-            Invoke("Spawn", 5);
+            //Invoke("Spawn", 5);
         }
 		else
 		{
